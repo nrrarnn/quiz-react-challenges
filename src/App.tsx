@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import LoginPage from './pages/auth/LoginPage'
 import RegisterPage from './pages/auth/RegisterPage'
+import HomePageUser from './pages/home/HomePageUser'
 
 function App() {
 
@@ -9,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginPage/>} />
         <Route path="/register" element={<RegisterPage/>} />
-        <Route path="/dashboard" element={<h1>Ini halaman dashboard</h1>} />
+        <Route path="/dashboard" element={<HomePageUser/>} />
       </Routes>
     </>
   )
