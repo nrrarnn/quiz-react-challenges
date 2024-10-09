@@ -1,29 +1,29 @@
-import { Button, Card } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import { quizCategories } from "../data/data";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const colors = {
-  blue: 'bg-blue-500',
-  red: 'bg-red-500',
-  green: 'bg-green-500',
-  yellow: 'bg-yellow-500',
-};
+import { useQuiz } from "../context/QuizContext";
 
 const CardQuizCategory = () => {
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const { selectedCategory, setSelectedCategory } = useQuiz();
   const [questions, setQuestions] = useState([]);
-
   const navigate = useNavigate();
 
   const startQuiz = async () => {
+    if (!selectedCategory) return; 
+
     try {
       const response = await axios.get(`https://opentdb.com/api.php?amount=10&category=${selectedCategory}`);
-      setQuestions(response.data.results);
+      const quizQuestions = response.data.results;
 
+      if (quizQuestions.length === 0) {
+        console.error('No questions found for this category.');
+        return;
+      }
 
-      navigate('/quiz', { state: { questions } });
+      setQuestions(quizQuestions);
+      navigate('/quiz', { state: { quizQuestions } });
     } catch (error) {
       console.error('Error fetching quiz questions:', error);
     }
@@ -31,17 +31,18 @@ const CardQuizCategory = () => {
 
   const handleCategorySelect = (categoryId: string) => {
     console.log("Category selected:", categoryId);
-    setSelectedCategory(categoryId); // Update state with selected category
+    setSelectedCategory(categoryId);
   };
 
   return (
     <div className="flex flex-col">
-      <div className="flex flex-row gap-4 mt-16">
+      <div className="flex flex-col sm:flex-row gap-4 mt-16 px-5 sm:px-20">
         {quizCategories.map((category) => (
           <div
             key={category.id}
-            className={`p-4 max-w-[250px] cursor-pointer shadow-md rounded-lg ${colors[category.color]}`}
-            onClick={() => handleCategorySelect(category.id)} // Direct function call
+            className={`p-4 max-w-[250px] cursor-pointer shadow-md rounded-lg text-white`}
+            style={{ backgroundColor: category.color }}
+            onClick={() => handleCategorySelect(category.id)}
           >
             <h2>{category.name}</h2>
             <p>{category.description}</p>
