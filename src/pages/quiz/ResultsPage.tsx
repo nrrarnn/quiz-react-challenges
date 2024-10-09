@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useQuiz } from "../../context/QuizContext";
+import { Button } from "@nextui-org/react";
 
 const ResultsPage = () => {
   const location = useLocation();
@@ -13,24 +14,23 @@ const ResultsPage = () => {
 
   };
 
-  // Fungsi untuk kembali ke home
   const handleGoHome = () => {
     navigate('/dashboard'); 
   };
 
   return (
-    <div className="results-page">
+    <div className="results-page flex justify-center flex-col items-center h-screen gap-3">
       <h1>Quiz Results</h1>
       <p>
         You scored {score} out of {totalQuestions}!
       </p>
-      <div className="button-group">
-        <button onClick={handleRetryQuiz} className="retry-button">
-          Ulangi Quiz
-        </button>
-        <button onClick={handleGoHome} className="home-button">
+      <div className="button-group flex gap-4">
+        <Button color="primary" onClick={handleRetryQuiz} className="retry-button">
+          Play again
+        </Button>
+        <Button color="primary" onClick={handleGoHome} className="home-button">
           Kembali ke Home
-        </button>
+        </Button>
       </div>
     </div>
   );

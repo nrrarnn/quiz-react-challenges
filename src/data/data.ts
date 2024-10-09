@@ -11,35 +11,35 @@ export const quizCategories: QuizCategory[] = [
     id: '19', 
     name: "Mathematics", 
     description: "Test your math skills with this quiz.", 
-    color: "6366f1", 
+    color: "#6366f1", 
     icon: 'FaAtom' 
   },
   { 
     id: '17', 
     name: "Science", 
     description: "Challenge yourself with science questions.", 
-    color: "14b8a6", 
+    color: "#14b8a6", 
     icon: 'FaAtom' 
   },
   { 
     id: '23',
     name: "History", 
     description: "How well do you know historical events?", 
-    color: "f97316", 
+    color: "#f97316", 
     icon: 'FaBook' 
   },
   { 
     id: '22', 
     name: "Geography", 
     description: "Explore the world with this geography quiz.", 
-    color: "ef4444", 
+    color: "#ef4444", 
     icon: 'FaMap' 
   },
   { 
     id: '18', 
     name: "Technology", 
     description: "Are you a tech geek? Prove it!", 
-    color: "3b82f6", 
+    color: "#3b82f6", 
     icon: 'FaLaptop' 
   },
 ];

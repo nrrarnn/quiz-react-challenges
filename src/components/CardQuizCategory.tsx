@@ -35,17 +35,21 @@ const CardQuizCategory = () => {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col mt-20">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold pb-3">Choose a category to start your quiz</h1>
+        <h3 className="text-lg font-medium ">Test your knowledge and see how far you can go. Ready to begin?</h3>
+      </div>
       <div className="flex flex-col sm:flex-row gap-4 mt-16 px-5 sm:px-20">
         {quizCategories.map((category) => (
           <div
             key={category.id}
-            className={`p-4 max-w-[250px] cursor-pointer shadow-md rounded-lg text-white`}
+            className={`p-4 max-w-[250px] cursor-pointer shadow-md rounded-lg text-center text-white`}
             style={{ backgroundColor: category.color }}
             onClick={() => handleCategorySelect(category.id)}
           >
-            <h2>{category.name}</h2>
-            <p>{category.description}</p>
+            <h2 className="text-xl font-bold">{category.name}</h2>
+            <p className="text-sm">{category.description}</p>
           </div>
         ))}
       </div>
