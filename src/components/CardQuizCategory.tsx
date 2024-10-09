@@ -44,10 +44,13 @@ const CardQuizCategory = () => {
         {quizCategories.map((category) => (
           <div
             key={category.id}
-            className={`p-4 max-w-[250px] cursor-pointer shadow-md rounded-lg text-center text-white`}
+            className={`p-4 w-[250px] cursor-pointer shadow-md rounded-lg text-center text-white`}
             style={{ backgroundColor: category.color }}
             onClick={() => handleCategorySelect(category.id)}
           >
+            <div className="w-full flex items-center justify-center py-2">
+              <img src={`/img/${category.icon}.png`} alt={category.name} />
+            </div>
             <h2 className="text-xl font-bold">{category.name}</h2>
             <p className="text-sm">{category.description}</p>
           </div>
