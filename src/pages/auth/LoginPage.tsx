@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import AuthLayout from './AuthLayout'
+import AuthLayout from '../../layouts/AuthLayout'
 import { Button, Input } from '@nextui-org/react'
 import { BsEye, BsEyeFill } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
@@ -75,7 +75,7 @@ const LoginPage = () => {
         </div>
         <div className='mt-10'>
           <p className='text-2xl font-bold'>Welcome to Quizzler</p>
-          <p className='text-slate-600 text-sm pt-2'>register your account</p>
+          <p className='text-slate-600 text-sm pt-2'>login to your account</p>
         </div>
         <form onSubmit={handleLogin} className='flex flex-col gap-6'>
           <Input 

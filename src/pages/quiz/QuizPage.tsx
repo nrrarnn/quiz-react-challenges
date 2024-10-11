@@ -8,15 +8,22 @@ const QuizPage = () => {
   const navigate = useNavigate();
   const { quizQuestions } = location.state; 
   const { questions, timeLeft, setTimeLeft } = useQuiz();
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedAnswers, setSelectedAnswers] = useState<string[]>(new Array(quizQuestions.length).fill(''));
+  const [score, setScore] = useState(0);
+
+  const currentQuestion = quizQuestions[currentQuestionIndex];
 
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prevTimeLeft) => {
         if (prevTimeLeft <= 1) {
           clearInterval(timer);
+          localStorage.removeItem('quizTimeLeft');
           navigate('/quiz/results', { state: { score, totalQuestions: quizQuestions.length } })
           return 0;
         }
+        localStorage.setItem('quizTimeLeft', prevTimeLeft - 1);
         return prevTimeLeft - 1; 
       });
     }, 1000); 
@@ -24,11 +31,23 @@ const QuizPage = () => {
     return () => clearInterval(timer);
   }, [setTimeLeft, navigate]);
 
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedAnswers, setSelectedAnswers] = useState<string[]>(new Array(quizQuestions.length).fill(''));
-  const [score, setScore] = useState(0);
+  useEffect(() => {
+  localStorage.setItem('selectedAnswers', JSON.stringify(selectedAnswers)); 
+}, [selectedAnswers]);
 
-  const currentQuestion = quizQuestions[currentQuestionIndex];
+  useEffect(() => {
+  const savedTimeLeft = localStorage.getItem('quizTimeLeft');
+  const savedAnswers = localStorage.getItem('selectedAnswers');
+  
+  if (savedTimeLeft) {
+    setTimeLeft(parseInt(savedTimeLeft)); 
+  }
+
+  if (savedAnswers) {
+    setSelectedAnswers(JSON.parse(savedAnswers)); 
+  }
+}, [setTimeLeft]);
+
 
   const handleAnswerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const updatedAnswers = [...selectedAnswers];
@@ -66,6 +85,11 @@ const QuizPage = () => {
         <h1>Quiz Time!</h1>
         <Button color='primary' variant='flat'>Time Left: {formatTime(timeLeft)}</Button>
       </div>
+
+      <div className='text-center'>
+        <p>{`Question ${currentQuestionIndex + 1} / ${quizQuestions.length}`}</p>
+      </div>
+
       <div className="question flex flex-col items-center justify-center mt-20">
         <h2 className='text-2xl font-bold'>{currentQuestion.question}</h2>
         <ul className='grid grid-cols-1 sm:grid-cols-2 gap-4 mt-16'>

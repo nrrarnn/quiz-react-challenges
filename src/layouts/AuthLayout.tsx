@@ -7,7 +7,7 @@ const AuthLayout = ({children}: {children: React.ReactNode}) => {
           <div className='text-3xl font-bold text-[#3c406d]'>Quizzler</div>
           <div className='py-16 mt-6 rounded-xl flex flex-col items-center bg-[#5cdae6]'>
             <img src="/img/bg.jpg" alt="Background Image" className='w-[430px]' />
-            <p className='text-[#3c406d] text-xl font-bold'>Lorem ipsum dolor sit amet</p>
+            <p className='text-[#3c406d] text-md font-bold w-[80%] text-center'>Challenge yourself and discover how much you really know.</p>
           </div>
       </div>
 

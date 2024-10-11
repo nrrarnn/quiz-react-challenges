@@ -44,7 +44,7 @@ const CardQuizCategory = () => {
         {quizCategories.map((category) => (
           <div
             key={category.id}
-            className={`p-4 w-[250px] cursor-pointer shadow-md rounded-lg text-center text-white`}
+            className={`p-4 w-[250px] hover:scale-105 transition-all duration-250 cursor-pointer shadow-md rounded-lg text-center text-white border-1.5 ${selectedCategory === category.id ? 'border-blue-700' : 'border-slate-300'}`}
             style={{ backgroundColor: category.color }}
             onClick={() => handleCategorySelect(category.id)}
           >

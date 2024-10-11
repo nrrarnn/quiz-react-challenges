@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import AuthLayout from './AuthLayout'
+import AuthLayout from '../../layouts/AuthLayout'
 import { Button, Input } from '@nextui-org/react';
 import { BsEye, BsEyeFill } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';

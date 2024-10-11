@@ -4,6 +4,7 @@ import { CiLogout } from 'react-icons/ci'
 import { useNavigate } from 'react-router-dom'
 import { RootState } from '../store'
 import { logout } from '../store/authReducer'
+import swal from 'sweetalert2'
 
 
 
@@ -17,6 +18,31 @@ const HeaderLayouts = ({ children }: { children: React.ReactNode}) => {
     dispatch(logout()); 
     navigate('/');
   };
+  const onLogout = () => {
+    swal({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this imaginary file!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then(function() {
+      handleLogout();
+      swal(
+        'Deleted!',
+        'Your imaginary file has been deleted.',
+        'success'
+      )
+    }, function(dismiss) {
+      if (dismiss === 'cancel') {
+        swal(
+          'Cancelled',
+          'Your imaginary file is safe :)',
+          'error'
+        )
+      }
+    })
+  }
   return (
     <div className='p-8 font-sans'>
       <header className='flex justify-between px-4'>
@@ -29,7 +55,7 @@ const HeaderLayouts = ({ children }: { children: React.ReactNode}) => {
             </DropdownTrigger>
             <DropdownMenu variant='flat'>
               <DropdownItem >
-                <button className='flex items-center gap-2' onClick={handleLogout}>
+                <button className='flex items-center gap-2' onClick={onLogout}>
                   <CiLogout/> Logout
                 </button>
               </DropdownItem>

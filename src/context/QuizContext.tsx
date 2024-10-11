@@ -19,7 +19,6 @@ const QuizContext = createContext<QuizContextType | undefined>(undefined);
 
 export const QuizProvider = ({ children }: { children: ReactNode }) => {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null); 
-  const [score, setScore] = useState<number>(0);
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
   const [questions, setQuestions] = useState<any[]>([]);
   const [timeLeft, setTimeLeft] = useState<number>(300); 
@@ -49,7 +48,7 @@ export const QuizProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <QuizContext.Provider value={{ selectedCategory, setSelectedCategory, score, setScore, answers, setAnswers, questions, retryQuiz, timeLeft, setTimeLeft }}>
+    <QuizContext.Provider value={{ selectedCategory, setSelectedCategory, answers, setAnswers, questions, retryQuiz, timeLeft, setTimeLeft }}>
       {children}
     </QuizContext.Provider>
   );
