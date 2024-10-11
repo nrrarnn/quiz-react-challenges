@@ -4,7 +4,8 @@ import { CiLogout } from 'react-icons/ci'
 import { useNavigate } from 'react-router-dom'
 import { RootState } from '../store'
 import { logout } from '../store/authReducer'
-import swal from 'sweetalert2'
+import Swal from 'sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 
 
@@ -19,30 +20,26 @@ const HeaderLayouts = ({ children }: { children: React.ReactNode}) => {
     navigate('/');
   };
   const onLogout = () => {
-    swal({
-      title: 'Are you sure?',
-      text: 'You will not be able to recover this imaginary file!',
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, keep it'
-    }).then(function() {
-      handleLogout();
-      swal(
-        'Deleted!',
-        'Your imaginary file has been deleted.',
-        'success'
-      )
-    }, function(dismiss) {
-      if (dismiss === 'cancel') {
-        swal(
-          'Cancelled',
-          'Your imaginary file is safe :)',
-          'error'
-        )
-      }
-    })
-  }
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to logout?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+        customClass: {
+          container: 'swal-container',
+          popup: 'swal-popup',
+          title: 'swal-title',
+          confirmButton: 'swal-confirm',
+          cancelButton: 'swal-cancel'
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          handleLogout();
+        }
+      });
+    }
   return (
     <div className='p-8 font-sans'>
       <header className='flex justify-between px-4'>

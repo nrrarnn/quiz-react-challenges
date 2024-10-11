@@ -7,12 +7,10 @@ const ResultsPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { score, totalQuestions } = location.state; 
-
-  const { retryQuiz } = useQuiz();
+  const { playQuiz } = useQuiz();
 
   const handleRetryQuiz = () => {
-    retryQuiz();
-
+    playQuiz();
   };
 
   const handleGoHome = () => {

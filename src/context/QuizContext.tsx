@@ -24,7 +24,7 @@ export const QuizProvider = ({ children }: { children: ReactNode }) => {
   const [timeLeft, setTimeLeft] = useState<number>(300); 
   const navigate = useNavigate();
 
-  const retryQuiz = async () => {
+  const playQuiz = async () => {
     if (!selectedCategory) {
       console.error('Category not selected.');
       return; 
@@ -40,7 +40,7 @@ export const QuizProvider = ({ children }: { children: ReactNode }) => {
       }
 
       setQuestions(quizQuestions); 
-      setTimeLeft(300); 
+      setTimeLeft(600); 
       navigate('/quiz', { state: { quizQuestions } }); 
     } catch (error) {
       console.error('Error fetching quiz questions:', error);
@@ -48,7 +48,7 @@ export const QuizProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <QuizContext.Provider value={{ selectedCategory, setSelectedCategory, answers, setAnswers, questions, retryQuiz, timeLeft, setTimeLeft }}>
+    <QuizContext.Provider value={{ selectedCategory, setSelectedCategory, answers, setAnswers, questions, playQuiz, timeLeft, setTimeLeft }}>
       {children}
     </QuizContext.Provider>
   );

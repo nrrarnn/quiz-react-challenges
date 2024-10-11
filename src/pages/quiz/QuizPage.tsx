@@ -32,21 +32,21 @@ const QuizPage = () => {
   }, [setTimeLeft, navigate]);
 
   useEffect(() => {
-  localStorage.setItem('selectedAnswers', JSON.stringify(selectedAnswers)); 
-}, [selectedAnswers]);
+    localStorage.setItem('selectedAnswers', JSON.stringify(selectedAnswers)); 
+  }, [selectedAnswers]);
 
   useEffect(() => {
-  const savedTimeLeft = localStorage.getItem('quizTimeLeft');
-  const savedAnswers = localStorage.getItem('selectedAnswers');
-  
-  if (savedTimeLeft) {
-    setTimeLeft(parseInt(savedTimeLeft)); 
-  }
+    const savedTimeLeft = localStorage.getItem('quizTimeLeft');
+    const savedAnswers = localStorage.getItem('selectedAnswers');
+    
+    if (savedTimeLeft) {
+      setTimeLeft(parseInt(savedTimeLeft)); 
+    }
 
-  if (savedAnswers) {
-    setSelectedAnswers(JSON.parse(savedAnswers)); 
-  }
-}, [setTimeLeft]);
+    if (savedAnswers) {
+      setSelectedAnswers(JSON.parse(savedAnswers)); 
+    }
+  }, [setTimeLeft]);
 
 
   const handleAnswerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
