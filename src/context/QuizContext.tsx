@@ -10,7 +10,7 @@ interface QuizContextType {
   answers: { [key: string]: string }; 
   setAnswers: React.Dispatch<React.SetStateAction<{ [key: string]: string }>>;
   questions: any[]; 
-  retryQuiz: () => void;
+  playQuiz: () => void;
   timeLeft: number; 
   setTimeLeft: React.Dispatch<React.SetStateAction<number>>;
 }
